@@ -26,10 +26,11 @@ const getPetById = async (id) => {
 const addPet = async (data) => {
   try {
     const newPet = await db.one(
-      "INSERT INTO pets (name, age, breed, gender ,location ,color ,size ,story , is_favorite, photo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+      "INSERT INTO pets (name, age, species, breed, gender ,location ,color ,size ,story , is_favorite, photo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
       [
         data.name,
         data.age,
+        data.species,
         data.breed,
         data.gender,
         data.location,
@@ -49,10 +50,11 @@ const addPet = async (data) => {
 const updatePet = async (id, pet) => {
   try {
     const updatedPet = await db.any(
-      "UPDATE pets SET name = $1, age = $2, breed = $3, gender = $4 ,location = $5,color = $6,size = $7, story = $8, is_favorite = $9, photo = $10 WHERE id = $11 RETURNING *",
+      "UPDATE pets SET name = $1, age = $2, species = $3, breed = $4, gender = $5, location = $6, color = $7, size = $8, story = $9, is_favorite = $10, photo = $11 WHERE id = $12 RETURNING *",
       [
         pet.name,
         pet.age,
+        pet.species,
         pet.breed,
         pet.gender,
         pet.location,
